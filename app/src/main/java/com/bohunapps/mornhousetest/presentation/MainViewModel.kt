@@ -1,4 +1,4 @@
-package com.bohunapps.mornhousetest
+package com.bohunapps.mornhousetest.presentation
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -12,7 +12,6 @@ import com.bohunapps.mornhousetest.room.DBRepo
 import com.bohunapps.mornhousetest.room.NumbersEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.takeWhile
@@ -50,13 +49,13 @@ class MainViewModel @Inject constructor(
         return value.all { it.isDigit() }
     }
 
-    private fun validateNumber(number: String) {
+     fun validateNumber(number: String) {
         _numIsCorrect.value = !(number.isEmpty() || !isDigit(number))
     }
 
     fun setCurrentNum(num: String) {
-        _currentNum.value = num
         validateNumber(num)
+        _currentNum.value = num
     }
 
     fun setNumberInfo(info: String){
@@ -71,10 +70,9 @@ class MainViewModel @Inject constructor(
     }
 
     fun getNumInfo() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 apiRepo.getNumInfo(_currentNum.value)
-                delay(100)
                 insertToDB()
             } catch (e: Exception) {
                 Log.e("ViewModel", "Failed to get num info", e)
@@ -85,7 +83,6 @@ class MainViewModel @Inject constructor(
 
     suspend fun updateFromDB(){
         dbRepo.getNums()
-        delay(500)
         dbRepo.nums.collect{
             _numsFromDB.value = it
         }
@@ -93,10 +90,9 @@ class MainViewModel @Inject constructor(
 
 
     fun getRandomInfo() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 apiRepo.getRandomInfo()
-                delay(100)
                 insertToDB()
             } catch (e: Exception) {
                 Log.e("ViewModel", "Failed to get random num info", e)

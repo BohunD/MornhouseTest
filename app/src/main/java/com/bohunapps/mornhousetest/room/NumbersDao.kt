@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.bohunapps.mornhousetest.Constants
+import com.bohunapps.mornhousetest.util.Constants
 import kotlinx.coroutines.flow.Flow
 
 @Dao

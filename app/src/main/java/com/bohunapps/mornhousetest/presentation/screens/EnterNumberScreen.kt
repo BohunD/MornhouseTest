@@ -1,4 +1,4 @@
-package com.bohunapps.mornhousetest
+package com.bohunapps.mornhousetest.presentation.screens
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.border
@@ -31,6 +31,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.bohunapps.mornhousetest.presentation.Destination
+import com.bohunapps.mornhousetest.presentation.MainViewModel
 import com.bohunapps.mornhousetest.room.NumbersEntity
 import kotlinx.coroutines.launch
 
@@ -63,6 +65,7 @@ fun EnterNumberScreen(navController: NavHostController, vm: MainViewModel) {
             )
 
                 Button(onClick = {
+                    vm.validateNumber(vm.currentNum.value)
                     if(vm.numIsCorrect.value) {
                         vm.getNumInfo()
                         navController.navigate(Destination.SecondScreen.route)

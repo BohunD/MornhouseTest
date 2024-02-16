@@ -1,4 +1,4 @@
-package com.bohunapps.mornhousetest
+package com.bohunapps.mornhousetest.util
 
 object Constants {
     const val DB = "numbers_info_db"

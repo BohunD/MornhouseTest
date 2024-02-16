@@ -1,4 +1,4 @@
-package com.bohunapps.mornhousetest
+package com.bohunapps.mornhousetest.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,6 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.bohunapps.mornhousetest.presentation.screens.EnterNumberScreen
+import com.bohunapps.mornhousetest.presentation.screens.NumInfoScreen
 import com.bohunapps.mornhousetest.ui.theme.MornhouseTestTheme
 import dagger.hilt.android.AndroidEntryPoint
 

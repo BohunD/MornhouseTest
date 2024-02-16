@@ -10,7 +10,7 @@ import retrofit2.Response
 class NumsApiRepo(private val api: NumsApi) {
     val numInfo = MutableStateFlow<NetworkResult<String?>>(NetworkResult.Initial())
 
-    fun getNumInfo(num: String){
+    suspend fun getNumInfo(num: String){
         api.getNum(num).enqueue(object: Callback<String> {
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 if(response.isSuccessful){
@@ -31,7 +31,7 @@ class NumsApiRepo(private val api: NumsApi) {
         numInfo.value = NetworkResult.Initial()
     }
 
-    fun getRandomInfo(){
+    suspend fun getRandomInfo(){
         api.getRandom().enqueue(object: Callback<String> {
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 if(response.isSuccessful){

@@ -1,4 +1,4 @@
-package com.bohunapps.mornhousetest
+package com.bohunapps.mornhousetest.presentation.screens
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
@@ -15,13 +15,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.bohunapps.mornhousetest.presentation.MainViewModel
 import kotlinx.coroutines.launch
 
 @Composable
 fun NumInfoScreen(vm: MainViewModel, navController: NavController) {
     val scope = rememberCoroutineScope()
     BackHandler() {
-        navController.navigate(Destination.FirstScreen.route)
+        navController.popBackStack()
         vm.clear()
         scope.launch{
             vm.updateFromDB()
@@ -48,7 +49,7 @@ fun NumInfoScreen(vm: MainViewModel, navController: NavController) {
         
         Button(modifier = Modifier.padding(top = 30.dp),
             onClick = {
-                navController.navigate(Destination.FirstScreen.route)
+                navController.popBackStack()
             vm.clear()
             scope.launch{
                 vm.updateFromDB()
